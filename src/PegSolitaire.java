@@ -2,84 +2,6 @@
 //COMP4106 A1
 import java.util.*;
 
-class Node{
-	//Attributes
-	char[][] state;
-	private int cost;
-	private LinkedList<Node> neighbours;
-	Node parent;
-	
-	//Constructors
-	public Node(char[][] state) {
-		this.state = state;
-		this.neighbours = new LinkedList<Node>();
-		this.parent = null;
-	}
-	
-	public Node(char[][] state, int cost) {
-		this.state = state;
-		this.cost = cost;
-		this.neighbours = new LinkedList<Node>();
-		this.parent = null;
-	}
-	
-	//Getters/Setters
-	public int getCost() {
-		return this.cost;
-	}
-	public void setCost(int cost) {
-		this.cost = cost;
-	}
-	public LinkedList<Node> getNeighbours(){
-		return this.neighbours;
-	}
-	public void addNeighbour(Node newNeighbour) {
-		this.neighbours.add(newNeighbour);
-	}
-	public Node getParent() {
-		return this.parent;
-	}
-	public void setParent(Node parent) {
-		this.parent = parent;
-	}
-	
-	//Functions
-	public void PrintState() {
-		for (int i = 0; i<7; i++){
-	        for (int j = 0; j<7; j++){
-	            System.out.print(state[i][j]);
-	        }
-	        System.out.println("");
-	    }
-	}
-	
-	public void makeEqualTo(char[][] target) {
-		for(int i = 0; i < 7; i++) {
-			for(int j = 0; j < 7; j++) {
-				target[i][j] = this.state[i][j];
-			}
-		}
-	}
-	
-	public boolean IsGoal() {
-		int marbleCount = 0;
-		for (int i = 0; i<7; i++){
-	        for (int j = 0; j<7; j++){
-	            if(state[i][j] == 'o') {
-	            	marbleCount += 1;
-	            }
-	        }
-	    }
-		if ((marbleCount == 1)&&(state[1][3] == 'o')) {
-			return true;
-		}
-		return false;
-	}
-	
-}
-
-
-
 public class PegSolitaire {
 	
 	public static boolean isEqualTo(char[][] one, char[][] two) {
@@ -214,7 +136,7 @@ public class PegSolitaire {
 							tempB[i-1][j] = ' ';
 							tempB[i-2][j] = 'o';
 							
-							Node tempN = new Node(tempB, 0);
+							Node tempN = new Node(tempB, 0, current.getNumMarbles() - 1);
 							
 							current.addNeighbour(tempN);
 						}
@@ -227,7 +149,7 @@ public class PegSolitaire {
 							tempB[i][j] = ' ';
 							tempB[i+1][j] = ' ';
 							tempB[i+2][j] = 'o';
-							Node tempN = new Node(tempB, 0);
+							Node tempN = new Node(tempB, 0, current.getNumMarbles() - 1);
 							
 							current.addNeighbour(tempN);
 						}
@@ -241,7 +163,7 @@ public class PegSolitaire {
 							tempB[i][j-1] = ' ';
 							tempB[i][j-2] = 'o';
 							
-							Node tempN = new Node(tempB, 0);
+							Node tempN = new Node(tempB, 0, current.getNumMarbles() - 1);
 							
 							current.addNeighbour(tempN);
 						}
@@ -255,7 +177,7 @@ public class PegSolitaire {
 							tempB[i][j+1] = ' ';
 							tempB[i][j+2] = 'o';
 							
-							Node tempN = new Node(tempB, 0);
+							Node tempN = new Node(tempB, 0, current.getNumMarbles() - 1);
 							
 							current.addNeighbour(tempN);
 						}
@@ -336,7 +258,7 @@ public class PegSolitaire {
 							tempB[i-1][j] = ' ';
 							tempB[i-2][j] = 'o';
 							
-							Node tempN = new Node(tempB, 100);
+							Node tempN = new Node(tempB, 100, current.getNumMarbles() - 1);
 							
 							current.addNeighbour(tempN);
 						}
@@ -349,7 +271,7 @@ public class PegSolitaire {
 							tempB[i][j] = ' ';
 							tempB[i+1][j] = ' ';
 							tempB[i+2][j] = 'o';
-							Node tempN = new Node(tempB, 100);
+							Node tempN = new Node(tempB, 100, current.getNumMarbles() - 1);
 							
 							current.addNeighbour(tempN);
 						}
@@ -363,7 +285,7 @@ public class PegSolitaire {
 							tempB[i][j-1] = ' ';
 							tempB[i][j-2] = 'o';
 							
-							Node tempN = new Node(tempB, 100);
+							Node tempN = new Node(tempB, 100, current.getNumMarbles() - 1);
 							
 							current.addNeighbour(tempN);
 						}
@@ -377,7 +299,7 @@ public class PegSolitaire {
 							tempB[i][j+1] = ' ';
 							tempB[i][j+2] = 'o';
 							
-							Node tempN = new Node(tempB, 100);
+							Node tempN = new Node(tempB, 100, current.getNumMarbles() - 1);
 							
 							current.addNeighbour(tempN);
 						}
@@ -455,7 +377,7 @@ public class PegSolitaire {
 							tempB[i-1][j] = ' ';
 							tempB[i-2][j] = 'o';
 							
-							Node tempN = new Node(tempB, 100);
+							Node tempN = new Node(tempB, 100, current.getNumMarbles() - 1);
 							
 							current.addNeighbour(tempN);
 						}
@@ -468,7 +390,7 @@ public class PegSolitaire {
 							tempB[i][j] = ' ';
 							tempB[i+1][j] = ' ';
 							tempB[i+2][j] = 'o';
-							Node tempN = new Node(tempB, 100);
+							Node tempN = new Node(tempB, 100, current.getNumMarbles() - 1);
 							
 							current.addNeighbour(tempN);
 						}
@@ -482,7 +404,7 @@ public class PegSolitaire {
 							tempB[i][j-1] = ' ';
 							tempB[i][j-2] = 'o';
 							
-							Node tempN = new Node(tempB, 100);
+							Node tempN = new Node(tempB, 100, current.getNumMarbles() - 1);
 							
 							current.addNeighbour(tempN);
 						}
@@ -496,7 +418,7 @@ public class PegSolitaire {
 							tempB[i][j+1] = ' ';
 							tempB[i][j+2] = 'o';
 							
-							Node tempN = new Node(tempB, 100);
+							Node tempN = new Node(tempB, 100, current.getNumMarbles() - 1);
 							
 							current.addNeighbour(tempN);
 						}
@@ -583,7 +505,7 @@ public class PegSolitaire {
 								tempB[i][j] = ' ';
 								tempB[i-1][j] = ' ';
 								tempB[i-2][j] = 'o';
-								Node tempN = new Node(tempB);
+								Node tempN = new Node(tempB, current.getNumMarbles() - 1);
 								current.addNeighbour(tempN);
 							}
 						}
@@ -595,7 +517,7 @@ public class PegSolitaire {
 								tempB[i][j] = ' ';
 								tempB[i+1][j] = ' ';
 								tempB[i+2][j] = 'o';
-								Node tempN = new Node(tempB);
+								Node tempN = new Node(tempB, current.getNumMarbles() - 1);
 								current.addNeighbour(tempN);
 							}
 						}
@@ -607,7 +529,7 @@ public class PegSolitaire {
 								tempB[i][j] = ' ';
 								tempB[i][j-1] = ' ';
 								tempB[i][j-2] = 'o';
-								Node tempN = new Node(tempB);
+								Node tempN = new Node(tempB, current.getNumMarbles() - 1);
 								current.addNeighbour(tempN);
 							}
 						}
@@ -619,7 +541,7 @@ public class PegSolitaire {
 								tempB[i][j] = ' ';
 								tempB[i][j+1] = ' ';
 								tempB[i][j+2] = 'o';
-								Node tempN = new Node(tempB);
+								Node tempN = new Node(tempB, current.getNumMarbles() - 1);
 								current.addNeighbour(tempN);
 							}
 						}
@@ -676,7 +598,7 @@ public class PegSolitaire {
 								tempB[i][j] = ' ';
 								tempB[i-1][j] = ' ';
 								tempB[i-2][j] = 'o';
-								Node tempN = new Node(tempB);
+								Node tempN = new Node(tempB, current.getNumMarbles() - 1);
 								current.addNeighbour(tempN);
 							}
 						}	
@@ -688,7 +610,7 @@ public class PegSolitaire {
 								tempB[i][j] = ' ';
 								tempB[i+1][j] = ' ';
 								tempB[i+2][j] = 'o';
-								Node tempN = new Node(tempB);
+								Node tempN = new Node(tempB, current.getNumMarbles() - 1);
 								current.addNeighbour(tempN);
 							}
 						}
@@ -700,7 +622,7 @@ public class PegSolitaire {
 								tempB[i][j] = ' ';
 								tempB[i][j-1] = ' ';
 								tempB[i][j-2] = 'o';
-								Node tempN = new Node(tempB);
+								Node tempN = new Node(tempB, current.getNumMarbles() - 1);
 								current.addNeighbour(tempN);
 							}
 						}
@@ -712,7 +634,7 @@ public class PegSolitaire {
 								tempB[i][j] = ' ';
 								tempB[i][j+1] = ' ';
 								tempB[i][j+2] = 'o';
-								Node tempN = new Node(tempB);
+								Node tempN = new Node(tempB, current.getNumMarbles() - 1);
 								current.addNeighbour(tempN);
 							}
 						}
@@ -741,19 +663,8 @@ public class PegSolitaire {
 		    {'o',' ',' ','o','o',' ',' '},//4
 		    {'.',' ',' ',' ','o','o','.'},//5
 		    {'.','.',' ',' ','o','.','.'},//6
-		};
+		};//14 marbles
 		
-		/*
-		char[][] board = new char[][] {
-			{'.','.',' ',' ',' ','.','.'},//0x
-			{'.',' ',' ',' ',' ','o','.'},//1|
-			{'o','o',' ',' ','o',' ',' '},//2|
-			{'o','o','o',' ','o',' ',' '},//3v
-		    {'o','o','o',' ','o',' ',' '},//4
-		    {'.',' ',' ',' ','o','o','.'},//5
-		    {'.','.',' ',' ','o','.','.'},//6
-		};
-		*/
 		Scanner reader = new Scanner(System.in);
 		System.out.println("DFS (0), BFS (1), A* using h1 (2), A* using h2 (3), A* using h1 and h2 (4): ");
 		int decision = reader.nextInt();
@@ -763,14 +674,15 @@ public class PegSolitaire {
 		//if you want to run DFS
 		if(decision == 0) {
 			Stack<Node> DFSstack = new Stack<>();
-			Node root = new Node(board);
+			Node root = new Node(board, 14);
+			//Node root = new Node(board2, 18);
 			DFSstack.push(root);
 			DFS(DFSstack);
 		}
 		//else if you want to run BFS
 		else if(decision == 1) {
 			LinkedList<Node> BFSqueue = new LinkedList<>();
-			Node root = new Node(board);
+			Node root = new Node(board, 14);
 			BFSqueue.add(root);
 			BFS(BFSqueue);
 		}
@@ -783,7 +695,7 @@ public class PegSolitaire {
 					return Double.compare(t.getCost(), t1.getCost());
 				}
 			});
-			Node root = new Node(board, 0);
+			Node root = new Node(board, 0, 14);
 			open.add(root);
 			AS1(open);
 		}
@@ -796,7 +708,7 @@ public class PegSolitaire {
 					return Double.compare(t.getCost(), t1.getCost());
 				}
 			});
-			Node root = new Node(board, 100);
+			Node root = new Node(board, 100, 14);
 			open.add(root);
 			AS2(open);
 		}
@@ -808,7 +720,7 @@ public class PegSolitaire {
 					return Double.compare(t.getCost(), t1.getCost());
 				}
 			});
-			Node root = new Node(board, 100);
+			Node root = new Node(board, 100, 14);
 			open.add(root);
 			AS3(open);
 		}
